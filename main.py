@@ -1,6 +1,7 @@
 import csv
 from datetime import date
 
+
 def export_to_csv(panel_efficiency, area, panel_power):
     today = date.today().strftime("%Y-%m-%d")
     try:
@@ -8,12 +9,31 @@ def export_to_csv(panel_efficiency, area, panel_power):
             writer = csv.writer(f)
             # Check if the file is empty and write the header row if needed
             if f.tell() == 0:
-                writer.writerow(["Panel Efficiency (%)", "Area (sq. meters)", "Panel Power (W)", "Date"])
+                writer.writerow(
+                    [
+                        "Panel Efficiency (%)",
+                        "Area (sq. meters)",
+                        "Panel Power (W)",
+                        "Date",
+                    ]
+                )
             writer.writerow([panel_efficiency, area, panel_power, today])
         print("File exported successfully!")
     except IOError:
         print("An error occurred while exporting the file.")
 
+
+# Function to get user input and validate it
+def get_user_input(prompt):
+    while True:
+        try:
+            value = float(input(prompt))
+            if value <= 0:
+                print("Please enter a positive value.")
+                continue
+            return value
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
 
 
 def calculate_efficiency(panel_power, area):
@@ -28,13 +48,12 @@ def calculate_efficiency(panel_power, area):
     return panel_efficiency
 
 
-
 def main():
     while True:
-        area = float(input("Enter the area of the solar panel in square meters (m2): "))
-        panel_power = float(
-            input("Enter the total power output of the solar panel in watts(W): ")
+        area = get_user_input(
+            "Enter the area of the solar panel in square meters(m^2): "
         )
+        panel_power = get_user_input("Enter the power of the solar panel in watts(W): ")
         print(calculate_efficiency(panel_power, area))
 
         choice = input("Press 'y' to continue or 'n' to stop: ")
