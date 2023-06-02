@@ -44,7 +44,7 @@ def calculate_efficiency(panel_power, area):
     if choice.lower() == "y":
         export_to_csv(panel_efficiency, area, panel_power)
     elif choice.lower() == "n":
-        print("File not exported.")
+        print("Result not exported.")
     return panel_efficiency
 
 
