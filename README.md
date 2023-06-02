@@ -8,7 +8,7 @@ Exporting to csv was added as additional functionality to this program along wit
 
 Install requirements:
 
-```pip install -r requirement.txt```
+```pip install -r requirements.txt```
 
 
 To run test:
